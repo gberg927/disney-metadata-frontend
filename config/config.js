@@ -1,1 +1,1 @@
-export const endpoint = `http://disney-metadata-backend.herokuapp.com/graphql`;
+export const endpoint = `https://disney-metadata-backend.herokuapp.com/graphql`;
