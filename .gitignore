@@ -1,0 +1,8 @@
+.next
+
+.env
+.env.build
+
+node_modules/
+
+config/config.js
