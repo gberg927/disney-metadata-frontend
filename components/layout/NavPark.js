@@ -6,6 +6,7 @@ const NavPark = ({ park, open }) => (
     title={open ? park.name : park.abbreviation}
     href="/parks/[parkId]"
     hrefAs={`/parks/${park.id}`}
+    nested
     open={open}
   />
 );

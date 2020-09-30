@@ -88,7 +88,12 @@ const Park = ({ id }) => {
                   </Link>
                 </td>
                 <td className="border px-4 py-2">
-                  {ride.waitTime && `${ride.waitTime.amount} min`}
+                  {ride.waitTime && ride.waitTime.status === 'Closed' && (
+                    <span className="text-red-500">{ride.waitTime.status}</span>
+                  )}
+                  {ride.waitTime && ride.waitTime.status !== 'Closed' && (
+                    <span>{ride.waitTime.status}</span>
+                  )}
                 </td>
               </tr>
             ))}

@@ -34,6 +34,27 @@ const Park = ({ id }) => {
       <p className="text-base text-gray-500">
         {ride.park.name} - {ride.park.resort.name}
       </p>
+      {ride.waitTimes && ride.waitTimes[0] && (
+        <h2 className="text-lg tracking-tighter leading-10 font-bold text-gray-500">
+          Status:
+          {ride.waitTimes[0].status === 'Closed' && (
+            <span className="ml-2 text-red-500">
+              {ride.waitTimes[0].status}
+            </span>
+          )}
+          {ride.waitTimes[0].status === 'Operating' && (
+            <span className="ml-2 text-green-500">
+              {ride.waitTimes[0].status}
+            </span>
+          )}
+          {ride.waitTimes[0].status !== 'Closed' &&
+            ride.waitTimes[0].status !== 'Operating' && (
+              <span className="ml-2 text-gray-900">
+                {ride.waitTimes[0].status}
+              </span>
+            )}
+        </h2>
+      )}
       <table className="table-auto">
         <thead>
           <tr>
