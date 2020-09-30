@@ -4,7 +4,11 @@ import NavPark from './NavPark';
 
 const NavResort = ({ resort, open }) => (
   <>
-    <NavItem title={open ? resort.name : resort.abbreviation} open={open} />
+    <NavItem
+      title={open ? resort.name : resort.abbreviation}
+      nested={false}
+      open={open}
+    />
     <ul>
       {resort.parks.map(park => (
         <NavPark key={`nav_park_${park.id}`} park={park} open={open} />

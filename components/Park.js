@@ -60,7 +60,6 @@ const Park = ({ id }) => {
   };
 
   orderRides('waitTime', 'desc');
-  console.log(rides);
 
   return (
     <>

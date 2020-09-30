@@ -7,7 +7,7 @@ const NavItem = ({ title, href, hrefAs, nested, open }) => (
       <li
         className={`p-2 rounded flex items-center ${
           open ? 'justify-left' : 'justify-center'
-        } bg-transparent text-gray-900 ${nested && 'ml-4'}`}
+        } bg-transparent text-gray-900 ${open && nested && 'ml-4'}`}
       >
         <p className="text-lg leading-6 font-medium">{title}</p>
       </li>
@@ -22,7 +22,8 @@ const NavItem = ({ title, href, hrefAs, nested, open }) => (
           <li
             className={`p-2 rounded flex items-center ${
               open ? 'justify-left' : 'justify-center'
-            } transition duration-200 ease-in-out bg-transparent hover:bg-purple-500 text-gray-900 hover:text-white ${nested &&
+            } transition duration-200 ease-in-out bg-transparent hover:bg-purple-500 text-gray-900 hover:text-white ${open &&
+              nested &&
               'ml-4'}`}
           >
             {title}

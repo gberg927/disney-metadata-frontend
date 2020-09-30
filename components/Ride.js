@@ -32,6 +32,7 @@ const Park = ({ id }) => {
         {ride.name}
       </h1>
       <p className="text-base text-gray-500">
+        {ride.area && `${ride.area}, `}
         {ride.park.name} - {ride.park.resort.name}
       </p>
       {ride.waitTimes && ride.waitTimes[0] && (
