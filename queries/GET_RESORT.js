@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export const GET_RESORT = gql`
-  query GET_RESORT($where: ResortWhereInput!) {
-    resorts(where: $where) {
+  query($id: Int!) {
+    resort(where: { id: $id }) {
       id
       name
       slug

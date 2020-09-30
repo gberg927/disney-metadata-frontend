@@ -1,6 +1,7 @@
 .next
 
-.env
-.env.build
+*.env.local
+
+.vscode/
 
 node_modules/

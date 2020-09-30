@@ -1,111 +1,67 @@
 import PropTypes from 'prop-types';
 import Head from 'next/head';
-import { Query } from 'react-apollo';
-import { Line } from 'react-chartjs-2';
-import { format } from 'date-fns';
+import { useQuery } from '@apollo/client';
+
 import Error from './util/Error';
 import Loading from './util/Loading';
-import { GET_RIDE } from '../queries';
+import { GET_RIDE } from '../queries/GET_RIDE';
 
-import PageHeader from './layout/PageHeader';
+const Park = ({ id }) => {
+  const { loading, error, data } = useQuery(GET_RIDE, { variables: { id } });
 
-const Ride = ({ resortSlug, parkSlug, rideSlug }) => (
-  <>
-    <Query
-      query={GET_RIDE}
-      variables={{
-        where: {
-          slug: {
-            equals: rideSlug,
-          },
-          park: {
-            slug: {
-              equals: parkSlug,
-            },
-            resort: {
-              slug: {
-                equals: resortSlug,
-              },
-            },
-          },
-        },
-      }}
-    >
-      {({ data, error, loading }) => {
-        if (error) return <Error error={error} />;
-        if (loading) return <Loading />;
-        if (!data || !data.rides) return <Error error="No Ride Found" />;
-        const ride = data.rides[0];
-        const chartLabels = ride.waitTimes.map(function(e) {
-          return format(new Date(e.timestamp), 'hh:mm aa');
-        });
-        const chartValues = ride.waitTimes.map(function(e) {
-          return e.amount;
-        });
-        const chartData = {
-          labels: chartLabels,
-          datasets: [
-            {
-              label: ride.name,
-              data: chartValues,
-              backgroundColor: ['rgba(75, 192, 192, 0.6)'],
-              borderWidth: 4,
-            },
-          ],
-        };
-        return (
-          <>
-            <Head>
-              <title>{ride.name} | DMD</title>
-            </Head>
-            <PageHeader title={ride.name} />
-            {ride.openedOn && (
-              <div>
-                <i>Opened on: {ride.openedOn}</i>
-              </div>
-            )}
-            {ride.area && (
-              <div>
-                <p>Found in: {ride.area}</p>
-              </div>
-            )}
-            {ride.duration && (
-              <div>
-                <p>Duration: {ride.duration} minutes</p>
-              </div>
-            )}
-            {ride.heightRestriction && (
-              <div>
-                <p>Height Restriction: {ride.heightRestriction}</p>
-              </div>
-            )}
-            {ride.fastPass && (
-              <div>
-                <p>Fastpass +: {ride.fastPass}</p>
-              </div>
-            )}
-            {ride.singleRider && (
-              <div>
-                <p>Single Ride: {ride.singleRider}</p>
-              </div>
-            )}
-            {ride.riderSwap && (
-              <div>
-                <p>Rider Swap: {ride.riderSwap}</p>
-              </div>
-            )}
-            <Line data={chartData} />
-          </>
-        );
-      }}
-    </Query>
-  </>
-);
+  if (loading) {
+    return <Loading />;
+  }
 
-Ride.propTypes = {
-  resortSlug: PropTypes.string.isRequired,
-  parkSlug: PropTypes.string.isRequired,
-  rideSlug: PropTypes.string.isRequired,
+  if (error) {
+    return <Error error={error} />;
+  }
+
+  const { ride } = data;
+
+  if (!ride) {
+    return <p>No Ride Found</p>;
+  }
+
+  return (
+    <>
+      <Head>
+        <title>{ride.name} - DisneyMetaData | Est. 2020</title>
+      </Head>
+      <h1 className="text-4xl tracking-tight leading-10 font-bold text-gray-900">
+        {ride.name}
+      </h1>
+      <p className="text-base text-gray-500">
+        {ride.park.name} - {ride.park.resort.name}
+      </p>
+      <table className="table-auto">
+        <thead>
+          <tr>
+            <th className="px-4 py-2 text-left">Date</th>
+            <th className="px-4 py-2 text-left">Wait Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          {ride.waitTimes &&
+            ride.waitTimes.map(waitTime => (
+              <tr key={waitTime.id}>
+                <td className="border px-4 py-2">
+                  {new Intl.DateTimeFormat('en-US', {
+                    dateStyle: 'short',
+                    timeStyle: 'short',
+                  }).format(new Date(waitTime.timestamp))}
+                </td>
+                <td className="border px-4 py-2">{waitTime.amount} min</td>
+              </tr>
+            ))}
+        </tbody>
+      </table>
+    </>
+  );
 };
 
-export default Ride;
+Park.propTypes = {
+  id: PropTypes.number.isRequired,
+};
+
+export default Park;

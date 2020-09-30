@@ -1,7 +1,3 @@
-const HomePage = () => (
-  <>
-    <div>Welcome to Next.js!</div>
-  </>
-);
+const IndexPage = () => <h4>Welcome!</h4>;
 
-export default HomePage;
+export default IndexPage;

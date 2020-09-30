@@ -1,3 +1,4 @@
+import React from 'react';
 import PropTypes from 'prop-types';
 
 const DisplayError = ({ error }) => {
@@ -8,7 +9,7 @@ const DisplayError = ({ error }) => {
     error.networkError.result.errors.length
   ) {
     return error.networkError.result.errors.map((error, i) => (
-      <div key={i}>
+      <div className="p-4 border-red-500 border-4 rounded" key={i}>
         <p data-test="graphql-error">
           <strong>Error: </strong>
           {error.message.replace('GraphQL error: ', '')}
@@ -17,7 +18,7 @@ const DisplayError = ({ error }) => {
     ));
   }
   return (
-    <div>
+    <div className="p-4 border-red-500 border-4 rounded">
       <p data-test="graphql-error">
         <strong>Error: </strong>
         {error.message.replace('GraphQL error: ', '')}

@@ -1,0 +1,42 @@
+import PropTypes from 'prop-types';
+import Link from 'next/link';
+
+const NavItem = ({ title, href, hrefAs, open }) => (
+  <>
+    {!href && (
+      <li
+        className={`p-2 rounded flex items-center ${
+          open ? 'justify-left' : 'justify-center'
+        } bg-transparent text-gray-900`}
+      >
+        <p className="text-lg leading-6 font-medium">{title}</p>
+      </li>
+    )}
+    {href && (
+      <Link
+        href={href}
+        as={hrefAs}
+        className="text-base leading-6 font-normal text-gray-900"
+      >
+        <a>
+          <li
+            className={`p-2 rounded flex items-center ${
+              open ? 'justify-left' : 'justify-center'
+            } transition duration-200 ease-in-out bg-transparent hover:bg-purple-500 text-gray-900 hover:text-white`}
+          >
+            {title}
+          </li>
+        </a>
+      </Link>
+    )}
+  </>
+);
+
+NavItem.propTypes = {
+  title: PropTypes.string.isRequired,
+  href: PropTypes.string,
+  hrefAs: PropTypes.string,
+  open: PropTypes.bool.isRequired,
+};
+
+export default NavItem;

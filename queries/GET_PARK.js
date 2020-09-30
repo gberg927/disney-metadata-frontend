@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export const GET_PARK = gql`
-  query GET_PARK($where: ParkWhereInput!) {
-    parks(where: $where) {
+  query($id: Int!) {
+    park(where: { id: $id }) {
       id
       name
       slug
@@ -13,6 +13,8 @@ export const GET_PARK = gql`
         id
         name
         slug
+        category
+        type
         waitTime {
           id
           timestamp
@@ -20,6 +22,9 @@ export const GET_PARK = gql`
           status
           amount
         }
+      }
+      resort {
+        name
       }
     }
   }

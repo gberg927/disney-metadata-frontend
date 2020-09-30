@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export const GET_RIDE = gql`
-  query GET_RIDE($where: RideWhereInput!) {
-    rides(where: $where) {
+  query GET_RIDE($id: Int!) {
+    ride(where: { id: $id }) {
       id
       name
       slug
@@ -23,6 +23,12 @@ export const GET_RIDE = gql`
         active
         status
         amount
+      }
+      park {
+        name
+        resort {
+          name
+        }
       }
     }
   }
