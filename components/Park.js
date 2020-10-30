@@ -37,6 +37,7 @@ const Park = ({ id }) => {
         <thead>
           <tr>
             <th className="px-4 py-2 text-left">Ride</th>
+            <th className="px-4 py-2 text-left">Land</th>
             <th className="px-4 py-2 text-left">Wait Time</th>
           </tr>
         </thead>
@@ -48,6 +49,9 @@ const Park = ({ id }) => {
                   <Link href="/rides/[rideId]" as={`/rides/${ride.id}`}>
                     <a>{ride.name}</a>
                   </Link>
+                </td>
+                <td className="border px-4 py-2">
+                  <span>{ride.area}</span>
                 </td>
                 <td className="border px-4 py-2">
                   {ride.waitTime && ride.waitTime.status === 'Closed' && (

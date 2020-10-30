@@ -15,6 +15,7 @@ export const GET_PARK = gql`
         slug
         category
         type
+        area
         waitTime {
           id
           timestamp
