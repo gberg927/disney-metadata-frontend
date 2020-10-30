@@ -36,9 +36,9 @@ const Park = ({ id }) => {
       <table className="table-auto">
         <thead>
           <tr>
-            <th className="px-4 py-2 text-left">Ride</th>
-            <th className="px-4 py-2 text-left">Land</th>
-            <th className="px-4 py-2 text-left">Wait Time</th>
+            <th className="py-2 text-left">Ride</th>
+            <th className="py-2 text-left">Land</th>
+            <th className="py-2 text-left">Wait Time</th>
           </tr>
         </thead>
         <tbody>
@@ -55,10 +55,14 @@ const Park = ({ id }) => {
                 </td>
                 <td className="border px-4 py-2">
                   {ride.waitTime && ride.waitTime.status === 'Closed' && (
-                    <span className="text-red-500">{ride.waitTime.status}</span>
+                    <span className="ml-2 text-red-500">
+                      {ride.waitTime.status}
+                    </span>
                   )}
                   {ride.waitTime && ride.waitTime.status !== 'Closed' && (
-                    <span>{ride.waitTime.amount} min</span>
+                    <span className="ml-2 text-green-500">
+                      {ride.waitTime.amount} min
+                    </span>
                   )}
                 </td>
               </tr>
