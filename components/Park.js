@@ -54,7 +54,7 @@ const Park = ({ id }) => {
                     <span className="text-red-500">{ride.waitTime.status}</span>
                   )}
                   {ride.waitTime && ride.waitTime.status !== 'Closed' && (
-                    <span>{ride.waitTime.status}</span>
+                    <span>{ride.waitTime.amount} min</span>
                   )}
                 </td>
               </tr>
