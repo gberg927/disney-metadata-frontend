@@ -24,43 +24,6 @@ const Park = ({ id }) => {
     return <p>No Park Found</p>;
   }
 
-  const rides = [...park.rides];
-
-  const orderRides = (orderBy, direction) => {
-    if (orderBy === 'name') {
-      rides.sort((a, b) => {
-        if (a.name < b.name) {
-          return direction === 'asc' ? -1 : 1;
-        }
-        if (a.name > b.name) {
-          return direction === 'asc' ? 1 : -1;
-        }
-        return 0;
-      });
-    } else if (orderBy === 'waitTime') {
-      rides.sort((a, b) => {
-        if (a.waitTime === null && b.waitTime !== null) {
-          return direction === 'asc' ? -1 : 1;
-        }
-        if (a.waitTime !== null && b.waitTime === null) {
-          return direction === 'asc' ? 1 : -1;
-        }
-        if (a.waitTime === null && b.waitTime === null) {
-          return 0;
-        }
-        if (a.waitTime.amount < b.waitTime.amount) {
-          return direction === 'asc' ? -1 : 1;
-        }
-        if (a.waitTime.amount > b.waitTime.amount) {
-          return direction === 'asc' ? 1 : -1;
-        }
-        return 0;
-      });
-    }
-  };
-
-  orderRides('waitTime', 'desc');
-
   return (
     <>
       <Head>
