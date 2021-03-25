@@ -54,11 +54,13 @@ const Park = ({ id }) => {
                   <span>{ride.area}</span>
                 </td>
                 <td className="border px-4 py-2">
-                  {ride.waitTime && ride.waitTime.status === 'Closed' && (
-                    <span className="ml-2 text-red-500">
-                      {ride.waitTime.status}
-                    </span>
-                  )}
+                  {ride.waitTime &&
+                    (ride.waitTime.status === 'Closed' ||
+                      ride.waitTime.status === 'Refurbishment') && (
+                      <span className="ml-2 text-red-500">
+                        {ride.waitTime.status}
+                      </span>
+                    )}
                   {ride.waitTime && ride.waitTime.status !== 'Closed' && (
                     <span className="ml-2 text-green-500">
                       {ride.waitTime.amount} min
