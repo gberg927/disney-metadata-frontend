@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
-export const LIST_RESORTS = gql`
-  query LIST_RESORTS {
+export const RESORTS = gql`
+  query RESORTS {
     resorts {
       id
       slug

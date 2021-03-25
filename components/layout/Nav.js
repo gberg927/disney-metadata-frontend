@@ -1,18 +1,21 @@
 import { useState } from 'react';
 import { useQuery } from '@apollo/client';
+import currentUser from '../auth/User';
 import NavResort from './NavResort';
+import NavItem from './NavItem';
 import ExpandIcon from '../icons/ExpandIcon';
 import CollapseIcon from '../icons/CollapseIcon';
-import { LIST_RESORTS } from '../../queries';
+import { RESORTS } from '../../queries';
 
 const Nav = () => {
+  const user = currentUser();
   const [open, setOpen] = useState(true);
-  const { loading, error, data } = useQuery(LIST_RESORTS);
+  const { loading, error, data } = useQuery(RESORTS);
   if (loading || error) return <></>;
   const { resorts } = data;
 
   return (
-    <nav className="col-start-1 col-end-2 row-start-1 row-end-3 flex flex-col border-r h-screen overflow-hidden">
+    <nav className="flex flex-col border-r h-screen overflow-hidden">
       <div className="flex justify-end items-center p-4 h-12 border-b">
         <button
           type="button"
@@ -32,6 +35,18 @@ const Nav = () => {
             open={open}
           />
         ))}
+        {user && (
+          <>
+            <NavItem title={open ? 'Admin' : 'A'} nested={false} open={open} />
+            <NavItem
+              title={open ? 'Jobs' : 'J'}
+              href="/jobs"
+              hrefAs="/jobs/"
+              nested
+              open={open}
+            />
+          </>
+        )}
       </ul>
     </nav>
   );

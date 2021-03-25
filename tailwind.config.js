@@ -10,7 +10,7 @@ module.exports = {
       body: ['Vollkorn', 'sans-serif'],
     },
     extend: {
-      colors: {},
+      spacing: { '128': '32rem' },
     },
   },
   variants: {},
