@@ -1,13 +1,9 @@
 import PropTypes from 'prop-types';
 import Head from 'next/head';
 import { useQuery } from '@apollo/client';
-import { Map, Marker, Popup, TileLayer } from 'react-leaflet-universal';
-
 import Error from './util/Error';
 import Loading from './util/Loading';
 import { GET_RIDE } from '../queries';
-
-import 'leaflet/dist/leaflet.css';
 
 const Park = ({ id }) => {
   const { loading, error, data } = useQuery(GET_RIDE, { variables: { id } });
@@ -25,8 +21,6 @@ const Park = ({ id }) => {
   if (!ride) {
     return <p>No Ride Found</p>;
   }
-
-  const position = [ride.latitude, ride.longitude];
 
   return (
     <>
@@ -86,28 +80,7 @@ const Park = ({ id }) => {
             </tbody>
           </table>
         </div>
-        <div className="ml-2 w-128 h-128">
-          <Map
-            center={position}
-            dragging={false}
-            doubleClickZoom={false}
-            scrollWheelZoom={false}
-            touchZoom={false}
-            zoom={20}
-            zoomControl={false}
-            style={{ height: '100%', width: '100%' }}
-          >
-            <TileLayer
-              attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-              url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
-            />
-            <Marker position={position}>
-              <Popup>
-                A pretty CSS3 popup. <br /> Easily customizable.
-              </Popup>
-            </Marker>
-          </Map>
-        </div>
+        <div className="ml-2 w-128 h-128"></div>
       </div>
     </>
   );
