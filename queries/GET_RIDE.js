@@ -18,7 +18,6 @@ export const GET_RIDE = gql`
       singleRider
       riderSwap
       waitTimes {
-        id
         timestamp
         active
         status

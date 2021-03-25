@@ -17,7 +17,6 @@ export const GET_PARK = gql`
         type
         area
         waitTime {
-          id
           timestamp
           active
           status
