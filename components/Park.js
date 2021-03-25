@@ -61,11 +61,13 @@ const Park = ({ id }) => {
                         {ride.waitTime.status}
                       </span>
                     )}
-                  {ride.waitTime && ride.waitTime.status !== 'Closed' && (
-                    <span className="ml-2 text-green-500">
-                      {ride.waitTime.amount} min
-                    </span>
-                  )}
+                  {ride.waitTime &&
+                    ride.waitTime.status !== 'Closed' &&
+                    ride.waitTime.status !== 'Refurbishment' && (
+                      <span className="ml-2 text-green-500">
+                        {ride.waitTime.amount} min
+                      </span>
+                    )}
                 </td>
               </tr>
             ))}
