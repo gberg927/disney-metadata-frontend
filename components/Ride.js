@@ -37,7 +37,8 @@ const Park = ({ id }) => {
       {ride.waitTimes && ride.waitTimes[0] && (
         <h2 className="text-lg tracking-tighter leading-10 font-bold text-gray-500">
           Status:
-          {ride.waitTimes[0].status === 'Closed' && (
+          {(ride.waitTimes[0].status === 'Closed' ||
+            ride.waitTimes[0].status === 'Refurbishment') && (
             <span className="ml-2 text-red-500">
               {ride.waitTimes[0].status}
             </span>
