@@ -69,7 +69,7 @@ const Park = ({ id }) => {
             <tbody>
               {ride.waitTimes &&
                 ride.waitTimes.map(waitTime => (
-                  <tr key={waitTime.id}>
+                  <tr key={waitTime.timestamp}>
                     <td className="border px-4 py-2">
                       {new Intl.DateTimeFormat('en-US', {
                         dateStyle: 'short',
