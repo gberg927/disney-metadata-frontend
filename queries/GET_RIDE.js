@@ -25,6 +25,7 @@ export const GET_RIDE = gql`
       }
       park {
         name
+        timezone
         resort {
           name
         }

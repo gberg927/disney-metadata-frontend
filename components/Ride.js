@@ -74,6 +74,7 @@ const Park = ({ id }) => {
                       {new Intl.DateTimeFormat('en-US', {
                         dateStyle: 'short',
                         timeStyle: 'short',
+                        timeZone: ride.park.timezone,
                       }).format(new Date(waitTime.timestamp))}
                     </td>
                     <td className="border px-4 py-2">{waitTime.amount} min</td>
