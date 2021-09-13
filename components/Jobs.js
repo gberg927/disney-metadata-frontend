@@ -43,7 +43,7 @@ const Park = () => {
         </thead>
         <tbody>
           {jobs &&
-            jobs.map(job => (
+            jobs.map((job) => (
               <tr key={job.id}>
                 <td className="border px-4 py-2">
                   <a>{job.id}</a>

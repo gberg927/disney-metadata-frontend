@@ -6,12 +6,19 @@ module.exports = {
   purge: [],
   theme: {
     fontFamily: {
-      display: ['Vollkorn', 'sans-serif'],
-      body: ['Vollkorn', 'sans-serif'],
+      sans: ['Vollkorn', 'sans-serif'],
     },
     extend: {
-      spacing: { '128': '32rem' },
+      spacing: { 128: '32rem' },
     },
+    stroke: (theme) => ({
+      current: 'currentColor',
+      black: theme('colors.black'),
+    }),
+    fill: (theme) => ({
+      current: 'currentColor',
+      purple: theme('colors.purple.500'),
+    }),
   },
   variants: {},
   plugins: [],
