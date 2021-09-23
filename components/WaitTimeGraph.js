@@ -1,13 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useQuery } from '@apollo/client';
 import PropTypes from 'prop-types';
+import ParentSize from '@visx/responsive/lib/components/ParentSize';
 import LineChart from './charts/LineChart';
 import getDateCriteria, { options } from './charts/util/dateCriteria';
 import { GET_WAITTIMES } from '../queries';
 
 const WaitTimeGraph = ({ ride }) => {
   const [selectedDateOption, setSelectedDateOption] = useState('today');
-  const [dateCriteria, setDateCriteria] = useState({});
+  const [dateCriteria, setDateCriteria] = useState(
+    getDateCriteria('today', ride.park.timezone)
+  );
   const [waitTimes, setWaitTimes] = useState([]);
 
   const { data } = useQuery(GET_WAITTIMES, {
@@ -34,8 +37,8 @@ const WaitTimeGraph = ({ ride }) => {
   }, [ride.park.timezone, selectedDateOption]);
 
   return (
-    <div className="col-span-5 flex flex-col bg-gray-50 shadow overflow-hidden rounded-lg">
-      <div className="flex items-center justify-between p-4 border-b">
+    <div className="md:col-span-5 flex flex-col bg-gray-50 shadow overflow-hidden rounded-lg">
+      <div className="flex items-center justify-between p-2 md:p-4 border-b">
         <h5 className="text-lg leading-6 font-bold uppercase text-gray-600">
           Wait Times
         </h5>
@@ -53,14 +56,20 @@ const WaitTimeGraph = ({ ride }) => {
           </select>
         </div>
       </div>
-      <div className="p-4">
-        <LineChart
-          data={waitTimes}
-          startDate={dateCriteria.startDate}
-          endDate={dateCriteria.endDate}
-          selectedDateOption={selectedDateOption}
-          timezone={ride.park.timezone}
-        />
+      <div className="h-72 p-2 md:p-4">
+        <ParentSize>
+          {({ width, height }) => (
+            <LineChart
+              width={width}
+              height={height}
+              data={waitTimes}
+              startDate={dateCriteria.startDate}
+              endDate={dateCriteria.endDate}
+              selectedDateOption={selectedDateOption}
+              timezone={ride.park.timezone}
+            />
+          )}
+        </ParentSize>
       </div>
     </div>
   );

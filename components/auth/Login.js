@@ -36,7 +36,6 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await login();
-    console.log(data);
     setInputs(initialInputs);
     router.push('/');
   };

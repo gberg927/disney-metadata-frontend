@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import Link from 'next/link';
-import { useTable, useSortBy } from 'react-table';
+import { useTable, useSortBy, useResizeColumns } from 'react-table';
 import { ArrowDownIcon, ArrowUpIcon } from '@heroicons/react/solid';
 
 const getHeightRestrictionValue = (heightRestriction) =>
@@ -87,7 +87,8 @@ const RidesTable = ({ resortSlug, parkSlug, rides }) => {
         columns,
         data,
       },
-      useSortBy
+      useSortBy,
+      useResizeColumns
     );
 
   return (
@@ -126,7 +127,6 @@ const RidesTable = ({ resortSlug, parkSlug, rides }) => {
         <tbody {...getTableBodyProps()}>
           {rows.map((row) => {
             prepareRow(row);
-            console.log(row);
             return (
               <tr
                 className="group"
