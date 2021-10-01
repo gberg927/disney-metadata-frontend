@@ -14,7 +14,7 @@ export const GET_PARK_BY_SLUG = gql`
       latitude
       longitude
       timezone
-      rides {
+      rides(orderBy: { name: asc }) {
         id
         name
         slug
